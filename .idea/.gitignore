@@ -1,0 +1,6 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Datasource local storage ignored files
+/../../../../../:\GitProject\stm32\mpu6050Test\.idea/dataSources/
+/dataSources.local.xml
