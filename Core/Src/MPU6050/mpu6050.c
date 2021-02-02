@@ -17,7 +17,7 @@
 #define q30  1073741824.0f
 
 short gyro[3], accel[3], sensors;
-float Pitch;
+float Pitch,Roll;
 float q0 = 1.0f, q1 = 0.0f, q2 = 0.0f, q3 = 0.0f;
 static signed char gyro_orientation[9] = { -1, 0, 0, 0, -1, 0, 0, 0, 1 };
 
@@ -236,9 +236,9 @@ void MPU6050_setI2CBypassEnabled(uint8_t enabled) {
  *功　　能:	    初始化 	MPU6050 以进入可用状态。
  *******************************************************************************/
 void MPU6050_initialize(void) {
-  MPU6050_setClockSource(MPU6050_CLOCK_PLL_XGYRO); //设置时钟
-  MPU6050_setFullScaleGyroRange(MPU6050_GYRO_FS_2000); //陀螺仪最大量程 +-1000度每秒
-  MPU6050_setFullScaleAccelRange(MPU6050_ACCEL_FS_2);	//加速度度最大量程 +-2G
+  MPU6050_setClockSource(MPU6050_CLOCK_PLL_YGYRO); //设置时钟
+  MPU6050_setFullScaleGyroRange(MPU6050_GYRO_FS_2000); //陀螺仪最大量程 +-2000度每秒
+  MPU6050_setFullScaleAccelRange(MPU6050_ACCEL_FS_16);	//加速度度最大量程 +-16G
   MPU6050_setSleepEnabled(0); //进入工作状态
   MPU6050_setI2CMasterModeEnabled(0);	 //不让MPU6050 控制AUXI2C
   MPU6050_setI2CBypassEnabled(0);	//主控制器的I2C与	MPU6050的AUXI2C	直通。控制器可以直接访问HMC5883L
@@ -295,7 +295,8 @@ void Read_DMP(void) {
     q1 = quat[1] / q30;
     q2 = quat[2] / q30;
     q3 = quat[3] / q30;
-    Pitch = sinf(-2 * q1 * q3 + 2 * q0 * q2) * 57.3;
+    Pitch = asinf(-2 * q1 * q3 + 2 * q0 * q2) * 57.3;
+    Roll = atan2f(2 * q2 * q3 + 2 * q0 * q1, -2 * q1 * q1 - 2 * q2* q2 + 1)* 57.3;
   }
 
 }

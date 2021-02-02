@@ -355,7 +355,7 @@
 extern	short gyro[3], accel[3];
 extern int16_t Gx_offset,Gy_offset,Gz_offset;
 extern float Acc1G_Values;
-extern float Pitch;
+extern float Pitch,Roll;
 
 #ifdef __cplusplus
  extern "C" {
