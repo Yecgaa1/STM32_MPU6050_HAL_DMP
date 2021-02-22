@@ -55,6 +55,7 @@ https://github.com/fMeow/STM32_DMP_Driver
   /* USER CODE END 3 */
 }
 ```
+如果你使用的不是i2c1，你可能会遇到i2c错误的问题&hi2cMPU605无法找到，你需要修改[MPU6050/I2C.h](https://github.com/Yecgaa1/STM32_MPU6050_HAL_DMP/blob/300ea137919a64df0bb098872f8fe8d30850d025/Core/Inc/MPU6050/I2C.h#L33)的33行修改定义
 
 构建时你会遇到以下warning
 
